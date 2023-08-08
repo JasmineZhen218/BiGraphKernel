@@ -1,0 +1,15 @@
+*.csv
+*.mat
+*.png
+*.jpg
+*.zip
+*.tar
+*.sav
+*.pth
+*.log
+*.pdf
+*.fst
+*.xlsx
+*.pkl
+*.npy
+.vscode
