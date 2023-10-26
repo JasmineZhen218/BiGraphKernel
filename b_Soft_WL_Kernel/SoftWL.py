@@ -16,13 +16,13 @@ def neighborhood_aggregation(x0, adj, iteration):
     ---------
     x: node labels after neighborhood aggregation
     """
-    assert(adj.diagonal() == np.ones(adj.shape[0]))
+    assert(adj.diagonal()[0] == 1)
     x = x0
     for iter in range(iteration):
         x = adj @ x
     return x
 
-def cluster_subtrees(X):
+def cluster_subtrees(X, n_job):
     """
     cluster subtrees
     parameters:
@@ -34,7 +34,7 @@ def cluster_subtrees(X):
     cluster: cluster labels of subtrees
     """
     # initial clustering 
-    Cluster_identities, _, _ = phenograph.cluster(X, n_jobs=-1)
+    Cluster_identities, _, _ = phenograph.cluster(X, n_jobs=n_job)
     return Cluster_identities
 
 def merge_close_clusters(X, Cluster_identities, merge_threshold):

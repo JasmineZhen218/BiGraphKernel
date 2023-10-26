@@ -19,7 +19,6 @@ def Pos2Adj(Pos, a=0.01):
     Adj : array_like
         Adjacency matrix of the graph. (Diagonal elements are one.)
     """
-
     Distance = squareform(pdist(Pos)) # Euclidean distance between all pairs of points
     Adj = np.exp(- a* Distance * Distance) # edge weight = exp(- a * distance^2)
     return Adj
