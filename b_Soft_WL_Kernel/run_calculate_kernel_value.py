@@ -20,7 +20,9 @@ args = parser.parse_args()
 print(args)
 
 FILE_NAMES = os.listdir(
-    os.path.join(PROJECT_ROOT, "Output", "b_Soft_WL_Kernel", "Danenberg", "Cohort_1")
+    os.path.join(
+        PROJECT_ROOT, "Output", "b_Soft_WL_Kernel", "Danenberg", "Cohort_1", "Subtrees"
+    )
 )
 assert len(FILE_NAMES) == 467
 
@@ -35,8 +37,10 @@ for i in range(len(FILE_NAMES)):
             "b_Soft_WL_Kernel",
             "Danenberg",
             "Cohort_1",
+            "Subtrees",
             file_name,
-            "initial_cluster_X"
+            "pattern_ids",
+            "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
             + str(args.k)
@@ -63,8 +67,10 @@ for i in range(len(FILE_NAMES)):
             "b_Soft_WL_Kernel",
             "Danenberg",
             "Cohort_1",
+            "Subtrees",
             file_name,
-            "initial_cluster_X"
+            "pattern_ids",
+            "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
             + str(args.k)
@@ -118,17 +124,17 @@ print("Saving Gram matrix", Gram_matrix.shape)
 for patient_id in Patient_ids:
     histogram = Histogram_dict[patient_id]
     os.makedirs(
-            os.path.join(
-                PROJECT_ROOT,
-                "Output",
-                "b_Soft_WL_Kernel",
-                "Danenberg",
-                "Cohort_1",
-                "Histograms",
-                "patient_" + str(patient_id),
-            ),
-            exist_ok=True,
-        )
+        os.path.join(
+            PROJECT_ROOT,
+            "Output",
+            "b_Soft_WL_Kernel",
+            "Danenberg",
+            "Cohort_1",
+            "Histograms",
+            "patient_" + str(patient_id),
+        ),
+        exist_ok=True,
+    )
     np.save(
         os.path.join(
             PROJECT_ROOT,
