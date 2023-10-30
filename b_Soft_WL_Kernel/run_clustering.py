@@ -70,11 +70,12 @@ for i in range(len(FILE_NAMES)):
             "Output",
             "b_Soft_WL_Kernel",
             "Danenberg",
-            "Subtrees",
             "Cohort_1",
+            "Subtrees",
             file_name,
             "pattern_ids",
-        )
+        ),
+        exist_ok=True,
     )
     patient_id = int(file_name.split("_")[1])
     initial_cluster_x = Initial_Cluster_X[Indices == i]
