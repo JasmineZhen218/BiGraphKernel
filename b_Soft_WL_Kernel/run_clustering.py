@@ -84,8 +84,8 @@ for i in range(len(FILE_NAMES)):
             "Output",
             "b_Soft_WL_Kernel",
             "Danenberg",
-            "Subtrees",
             "Cohort_1",
+            "Subtrees",
             file_name,
             "pattern_ids",
             "pattern_id_iter_"
