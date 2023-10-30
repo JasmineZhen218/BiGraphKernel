@@ -10,6 +10,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_job", type=int, default=-1, help="Number of jobs for parallel computing")
 parser.add_argument("--iteration", type=int, default=1, help="Iteration of neighborhood aggregation")
+parser.add_argument("--k", type=int, default=30, help="Neighbor of neighborhood in PhenoGraph")
 args = parser.parse_args()
 
 
@@ -33,7 +34,7 @@ print(f"Concatenated feature shape {X_concat.shape}", f"{X_concat.shape[0]} subt
 
 # Cluster all subtrees
 # call "export OMP_NUM_THREADS=1" before running to avoid "Too many memory regions" error with Dask
-Initial_Cluster_X = cluster_subtrees(X_concat, n_job = -1) 
+Initial_Cluster_X = cluster_subtrees(X_concat, k = args.k, n_job = -1) 
 print("{} unique clusters".format(len(np.unique(Initial_Cluster_X))))
 # Save initial clusters
 for i in range(len(FILE_NAMES)):
@@ -43,7 +44,7 @@ for i in range(len(FILE_NAMES)):
     np.save(
         os.path.join(PROJECT_ROOT, "Output", "b_Soft_WL_Kernel", "Danenberg", "Cohort_1",
         file_name,
-        "initial_cluster_X"+str(args.iteration)+".npy"),
+        "initial_cluster_X"+str(args.iteration)+ "_PhenoGraph_k_" + str(args.k) + ".npy"),
         initial_cluster_x
     )
     print(f"Saving {file_name}", initial_cluster_x.shape)
