@@ -65,3 +65,42 @@ def get_cell_phenotype_id(dataset):
             "Myoepithalial": 26,
         }
     return cell_phenotype_id
+
+
+def get_cell_color(dataset):
+    if dataset == "Danenberg":
+        cell_color = {
+            "CK^{med}ER^{lo}": "#40647A",
+            "ER^{hi}CXCL12^{+}": "#99CCCC",
+            "CD4^{+} T cells & APCs": "#F8B195",
+            "CD4^{+} T cells": "#FF50A2",
+            "Endothelial": "#FFC400",
+            "Fibroblasts": "#007B1D",
+            "Myofibroblasts PDPN^{+}": "#c6ce2b",
+            "CD8^{+} T cells": "#D6316F",
+            "CK8-18^{hi}CXCL12^{hi}": "#00BFFF",
+            "Myofibroblasts": "#81ca33",
+            "CK^{lo}ER^{lo}": "#73A9DF",
+            "Macrophages": "#800080",
+            "CK^{+} CXCL12^{+}": "#1E90FF",
+            "CK8-18^{hi}ER^{lo}": "#006BD7",
+            "CK8-18^{+} ER^{hi}": "#005A9C",
+            "CD15^{+}": "#D4CFC9",
+            "MHC I & II^{hi}": "#8F756B",
+            "T_{Reg} & T_{Ex}": "#FE7A15",
+            "CD57^{+}": "#D699B4",
+            "Ep Ki67^{+}": "#000066",
+            "CK^{lo}ER^{med}": "#0088B2",
+            "Macrophages & granulocytes": "#d6bbf6",
+            "CD38^{+} lymphocytes": "#FBFEC9",
+            "Ki67^{+}": "#006400",
+            "HER2^{+}": "#D3E7EE",
+            "B cells": "#FFFF00",
+            "Basal": "#805B3B",
+            "Fibroblasts FSP1^{+}": "#37AD3F",
+            "Granulocytes": "#6C5B7B",
+            "MHC I^{hi}CD57^{+}": "#A69287",
+            "Ep CD57^{+}": "#708090",
+            "MHC^{hi}CD15^{+}": "#F4A460",
+        }
+    return cell_color
