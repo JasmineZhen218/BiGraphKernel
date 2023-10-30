@@ -78,8 +78,9 @@ for i in range(len(FILE_NAMES)):
         )
     )
     histogram = np.zeros(num_unique_patterns)
-    for j in range(len(np.unique(pattern_ids))):
+    for j in range(num_unique_patterns):
         histogram[j] = np.sum(pattern_ids == j)
+    assert np.sum(histogram) != 0
     if patient_id not in Histogram_dict:
         Histogram_dict[patient_id] = histogram
     else:
@@ -88,6 +89,7 @@ for i in range(len(FILE_NAMES)):
 Histograms = np.zeros((len(Histogram_dict.keys()), num_unique_patterns))
 Patient_ids = []
 for i, (patient_id, histogram) in enumerate(Histogram_dict.items()):
+    assert np.sum(histogram) != 0
     Histograms[i, :] = Histogram_dict[patient_id]
     Patient_ids.append(patient_id)
 assert len(Patient_ids) == Histograms.shape[0]
@@ -156,7 +158,7 @@ for patient_id in Patient_ids:
     ax.bar(np.arange(len(histogram)), histogram)
     ax.set_xlabel("Pattern ID")
     ax.set_ylabel("Frequency")
-    ax.set_ylim([0, np.max(Histograms)])
+    ax.set_ylim([0, np.percentile(Histograms, 95)])
     f.savefig(
         os.path.join(
             PROJECT_ROOT,

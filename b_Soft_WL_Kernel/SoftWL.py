@@ -23,9 +23,15 @@ def get_Gram_matrix(Histograms):
 
 def SoftWL_kernel(histogram_i, histogram_j):
     k_ij = np.inner(histogram_i, histogram_j)
-    k_ij_normalized = k_ij / np.sqrt(
-        np.inner(histogram_i, histogram_j) * np.inner(histogram_i, histogram_j)
+    denominator = np.sqrt(
+        np.inner(histogram_i, histogram_i) * np.inner(histogram_j, histogram_j)
     )
+    if denominator == 0:
+        print("denominator is 0")
+        print(f"histogram_i = {histogram_i}")
+        print(f"histogram_j = {histogram_j}")
+        print(f"k_ij = {k_ij}, divide {denominator}")
+    k_ij_normalized = k_ij / denominator
     return k_ij_normalized
 
 
