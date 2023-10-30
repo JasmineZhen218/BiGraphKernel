@@ -25,7 +25,8 @@ for i in range(len(FILE_NAMES)):
             "Cohort_1",
             "Subtrees",
             file_name,
-            "X0.npy",
+            "pattern_ids",
+            "pattern_id_X2_PhenoGraph_k_100.npy",
         ),
         os.path.join(
             PROJECT_ROOT,
@@ -35,8 +36,8 @@ for i in range(len(FILE_NAMES)):
             "Cohort_1",
             "Subtrees",
             file_name,
-            "neighborhood_aggregation",
-            "X0.npy"
+           "pattern_ids",
+            "pattern_id_iter_2_PhenoGraph_k_100.npy"
         ),
     )
     print(f"Renaming {file_name}")
