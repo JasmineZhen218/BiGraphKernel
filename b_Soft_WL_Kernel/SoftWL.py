@@ -52,12 +52,13 @@ def merge_close_clusters(X, Cluster_identities, merge_threshold):
     """
     centroids = compute_cluster_centroids(X, Cluster_identities)
     pairwise_dist = pairwise_distances(centroids)
+    Cluster_identities_merged = Cluster_identities.copy()
     num_clusters = len(np.unique(Cluster_identities))
     for i in range(num_clusters):
         for j in range(i + 1, num_clusters):
             if pairwise_dist[i, j] < merge_threshold:
-                Cluster_identities[Cluster_identities == j] = i
-    return Cluster_identities
+                Cluster_identities_merged[Cluster_identities_merged == j] = i
+    return Cluster_identities_merged
 
 def compute_cluster_centroids(X, Cluster_identities):
     """
