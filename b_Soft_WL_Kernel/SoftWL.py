@@ -4,26 +4,29 @@ from sklearn.metrics import pairwise_distances
 import os
 
 
-def calculate_SoftWL_kernel(Histograms_pattern):
+def get_Gram_matrix(Histograms):
     """
     parameters:
     -----------
     Histograms: list of histograms of TME patterns
-    return: 
+    return:
     -----------
     SoftWL kernel Gram matrix
     """
-    Gram_matrix = np.zeros((len(Histograms_pattern), len(Histograms_pattern)))
-    for i in range(len(Histograms_pattern)):
-        for j in range(i, len(Histograms_pattern)):
-            k_ij = np.inner(Histograms_pattern[i], Histograms_pattern[j])
-            k_ij_normalized = k_ij / np.sqrt(
-                np.inner(Histograms_pattern[i], Histograms_pattern[i])
-                * np.inner(Histograms_pattern[j], Histograms_pattern[j])
-            )
-            Gram_matrix[i, j] = k_ij_normalized
+    Gram_matrix = np.zeros((len(Histograms), len(Histograms)))
+    for i in range(len(Histograms)):
+        for j in range(i, len(Histograms)):
+            Gram_matrix[i, j] = SoftWL_kernel(Histograms[i], Histograms[j])
             Gram_matrix[j, i] = Gram_matrix[i, j]
     return Gram_matrix
+
+
+def SoftWL_kernel(histogram_i, histogram_j):
+    k_ij = np.inner(histogram_i, histogram_j)
+    k_ij_normalized = k_ij / np.sqrt(
+        np.inner(histogram_i, histogram_j) * np.inner(histogram_i, histogram_j)
+    )
+    return k_ij_normalized
 
 
 def neighborhood_aggregation(x0, adj, iteration):
@@ -81,7 +84,6 @@ def compute_cluster_centroids(X, Cluster_identities):
         centroid = np.mean(cluster_points, axis=0)
         centroids.append(centroid)
     return np.array(centroids)
-
 
 
 def merge_close_clusters(X, Cluster_identities, merge_threshold):
