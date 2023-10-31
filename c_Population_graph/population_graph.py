@@ -25,12 +25,12 @@ def construct_PopulationGraph(Gram_matrix, PopulationGraph_type, para_dict={}):
         G_population = nx.from_numpy_array(Gram_matrix_)
     elif PopulationGraph_type == "knn_graph":
         for i in range(Gram_matrix_.shape[0]):
-            Gram_matrix_[i, np.argsort(Gram_matrix_[i, :])[: -para_dict["k"]]] = 0
+            Gram_matrix_[i, np.argsort(Gram_matrix_[i, :])[: -para_dict["knn_k"]]] = 0
         Gram_matrix_ = np.maximum(Gram_matrix_, Gram_matrix_.transpose()) # make it symmetric
         G_population = nx.from_numpy_array(Gram_matrix_)
     elif PopulationGraph_type == "two_step_knn_graph":
         for i in range(Gram_matrix_.shape[0]):
-            Gram_matrix_[i, np.argsort(Gram_matrix_[i, :])[: -para_dict["k"]]] = 0
+            Gram_matrix_[i, np.argsort(Gram_matrix_[i, :])[: -para_dict["knn_k"]]] = 0
         adj_1 = np.maximum(Gram_matrix_, Gram_matrix_.transpose()) # make it symmetric
         adj_2 = np.zeros_like(Gram_matrix_)
         for i in range(Gram_matrix_.shape[0]):
