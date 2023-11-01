@@ -19,7 +19,7 @@ def calculate_hazard_ratio(length, status, community_id):
         cph.fit(
             pd.DataFrame(
                 {"length": length, "status": status, "community": community_id == i}
-            ).dropna(),
+            ),
             duration_col="length",
             event_col="status",
             show_progress=False,
