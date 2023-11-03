@@ -14,6 +14,9 @@ parser.add_argument(
 parser.add_argument(
     "--k", type=int, default=100, help="Neighbor of neighborhood in PhenoGraph"
 )
+parser.add_argument(
+    "--method", type=str, default='centroid', help="Method for cell type alignment"
+)
 args = parser.parse_args()
 print(args)
 
@@ -36,7 +39,7 @@ for i in range(len(FILE_NAMES)):
             "Cohort_2",
             "Subtrees",
             file_name,
-            "matched_pattern_ids",
+            "matched_pattern_ids_centroid_alignment",
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
@@ -66,7 +69,7 @@ for i in range(len(FILE_NAMES)):
             "Cohort_2",
             "Subtrees",
             file_name,
-            "matched_pattern_ids",
+            "matched_pattern_ids_centroid_alignment",
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
@@ -110,7 +113,7 @@ pickle.dump(
             + str(args.iteration)
             + "_PhenoGraph_k_"
             + str(args.k)
-            + ".pkl",
+            + "_centroid_alignment.pkl",
         ),
         "wb",
     ),
@@ -126,7 +129,7 @@ for patient_id in Patient_ids:
             "b_Soft_WL_Kernel",
             "Danenberg",
             "Cohort_2",
-            "Matched_Histograms",
+            "Matched_Histograms_centroid_alignment",
             "patient_" + str(patient_id),
         ),
         exist_ok=True,
@@ -138,7 +141,7 @@ for patient_id in Patient_ids:
             "b_Soft_WL_Kernel",
             "Danenberg",
             "Cohort_2",
-            "Matched_Histograms",
+            "Matched_Histograms_centroid_alignment",
             "patient_" + str(patient_id),
             "histogram_iter_"
             + str(args.iteration)

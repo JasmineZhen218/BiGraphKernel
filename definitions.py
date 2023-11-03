@@ -36,7 +36,7 @@ def get_cell_phenotype_id(dataset):
         }
     elif dataset == "Jackson":
         cell_phenotype_id = {
-            "B cells ": 0,
+            "B cells": 0,
             "B and T cells": 1,
             "T cells_1": 2,
             "Macrophages_1": 3,

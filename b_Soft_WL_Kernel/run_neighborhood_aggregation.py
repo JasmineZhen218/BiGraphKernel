@@ -6,7 +6,6 @@ from utils import PROJECT_ROOT
 import numpy as np
 from SoftWL import neighborhood_aggregation
 
-print("Cohort 1")
 FILE_NAMES = os.listdir(
     os.path.join(PROJECT_ROOT, "Output", "a_Cellular_graph", "Jackson")
 )
@@ -41,9 +40,9 @@ for file_name in FILE_NAMES:
             "a_Cellular_graph",
             "Jackson",
             file_name,
-            "CellType.npy",
+            "matched_CellType_centroid_alignment.npy",
         )
-    )
+    ).reshape(-1)
     X0 = np.zeros((Adj.shape[0], 32))
     for i in range(32):
         X0[CellType == i, i] = 1
@@ -56,7 +55,7 @@ for file_name in FILE_NAMES:
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
-            "X0.npy",
+            "matched_X0_centroid_alignment.npy",
         ),
         X0,
     )
@@ -71,7 +70,7 @@ for file_name in FILE_NAMES:
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
-            "X1.npy",
+            "matched_X1_centroid_alignment.npy",
         ),
         X,
     )
@@ -86,7 +85,7 @@ for file_name in FILE_NAMES:
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
-            "X2.npy",
+            "matched_X2_centroid_alignment.npy",
         ),
         X,
     )
@@ -101,7 +100,7 @@ for file_name in FILE_NAMES:
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
-            "X3.npy",
+            "matched_X3_centroid_alignment.npy",
         ),
         X,
     )
@@ -116,7 +115,7 @@ for file_name in FILE_NAMES:
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
-            "X4.npy",
+            "matched_X4_centroid_alignment.npy",
         ),
         X,
     )
@@ -131,7 +130,7 @@ for file_name in FILE_NAMES:
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
-            "X5.npy",
+            "matched_X5_centroid_alignment.npy",
         ),
         X,
     )

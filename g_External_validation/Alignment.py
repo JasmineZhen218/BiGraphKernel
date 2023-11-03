@@ -27,3 +27,20 @@ def knn_alignment(X_reference, Label_reference, X_query, k=100):
         )
     ]
     return label_query_hat
+
+
+def centroid_alignment(X_reference, Label_reference, X_query, k=100):
+    # feature_reference: n x d
+    # label_reference: n x 1
+    # feature_query: m x d
+    # label_query_estimated: m x 1
+    Centroid_reference = np.zeros((np.unique(Label_reference).shape[0], X_reference.shape[1]))
+    for i in range(np.unique(Label_reference).shape[0]):
+        Centroid_reference[i, :] = np.mean(X_reference[Label_reference == i, :], axis=0)
+    # distance: m x k
+    # indices: m x k
+    neigh = NearestNeighbors(n_neighbors=1, radius=1)
+    neigh.fit(Centroid_reference)
+    distances, index = neigh.kneighbors(X_query) 
+    label_query_hat = index # m x k
+    return label_query_hat
