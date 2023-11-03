@@ -1,11 +1,5 @@
 Iter = 1, PhenoGraph_k = 30, knn_graph (percentile=95,k=3), Overall Survival, Number of Groups = 11, p-value = 0.00013
-Iter = 1, PhenoGraph_k = 30, knn_graph (percentile=95,k=5), Overall Survival, Number of Groups = 12, p-value = 0.00044
-Iter = 1, PhenoGraph_k = 30, two_step_knn_graph (percentile=95,k=5), Overall Survival, Number of Groups = 10, p-value = 0.00049
-Iter = 2, PhenoGraph_k = 30, knn_graph (percentile=95,k=10), Overall Survival, Number of Groups = 12, p-value = 0.00052
 Iter = 2, PhenoGraph_k = 30, knn_graph (percentile=95,k=15), Overall Survival, Number of Groups = 11, p-value = 0.00003
-Iter = 2, PhenoGraph_k = 30, knn_graph (percentile=95,k=20), Overall Survival, Number of Groups = 11, p-value = 0.00023
-Iter = 2, PhenoGraph_k = 30, knn_graph (percentile=95,k=25), Overall Survival, Number of Groups = 9, p-value = 0.00038
-Iter = 2, PhenoGraph_k = 30, knn_graph (percentile=95,k=30), Overall Survival, Number of Groups = 8, p-value = 0.00047
 Iter = 2, PhenoGraph_k = 30, two_step_knn_graph (percentile=95,k=5), Overall Survival, Number of Groups = 12, p-value = 0.00058
 Iter = 2, PhenoGraph_k = 30, two_step_knn_graph (percentile=95,k=10), Overall Survival, Number of Groups = 11, p-value = 0.00017
 Iter = 2, PhenoGraph_k = 30, complete_graph_with_weak_edges_removed (percentile=95,k=10), Disease-specific Survival, Number of Groups = 8, p-value = 0.00019

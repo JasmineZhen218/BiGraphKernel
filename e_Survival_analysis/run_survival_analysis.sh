@@ -1,6 +1,6 @@
-ITERATION=(2 3 4 5)
+ITERATION=(1 2 3 4 5)
 PhenoGraph_k=(30)
-SURVIVAL_TYPE=('Overall' 'Disease-specific' 'Relapse-free') #'Overall' 'Disease-specific' 
+SURVIVAL_TYPE=('Overall') #'Overall' 'Disease-specific' 
 
 for ITERATION in ${ITERATION[@]};do
     for PhenoGraph_k in ${PhenoGraph_k[@]};do
