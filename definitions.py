@@ -104,3 +104,27 @@ def get_cell_color(dataset):
             "MHC^{hi}CD15^{+}": "#F4A460",
         }
     return cell_color
+
+
+def get_paired_markers(source="Danenberg", target="Jackson"):
+    if (source == "Danenberg") and (target == "Jackson"):
+        Paired_Markers = [
+            ("panCK", "AE1/AE3"),
+            ("CK8-18", "CK8/18"),
+            ("CK5", "CK5"),
+            ("ER", "ER"),
+            ("HER2 (3B5)", "Her2"),
+            ("HER2 (D8F12)", "Her2"),
+            ("CD31-vWF", "vWF/CD31"),
+            ("SMA", "SMA"),
+            ("Ki-67", "Ki-67"),
+            ("c-Caspase3", "cleaved PARP/cleaved Caspase3"),
+            ("CD45RA", "CD45"),
+            ("CD3", "CD3"),
+            ("CD20", "CD20"),
+            ("CD68", "CD68"),
+            ("Histone H3", "Histone H3_1"),
+            ("Histone H3", "Histone H3_2"),
+            ("DNA1", "DNA1"),
+        ]
+    return Paired_Markers
