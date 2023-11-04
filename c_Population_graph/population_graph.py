@@ -21,7 +21,10 @@ def construct_PopulationGraph(Gram_matrix, PopulationGraph_type, para_dict={}):
     if PopulationGraph_type == "complete_graph":
         G_population = nx.from_numpy_array(Gram_matrix_)
     elif PopulationGraph_type == "complete_graph_with_weak_edges_removed":
-        Gram_matrix_[Gram_matrix_ < np.percentile(Gram_matrix, para_dict['weight_threshold_percentile'])] = 0
+        if 'weight_threshold_percentile' in para_dict.keys():
+            Gram_matrix_[Gram_matrix_ < np.percentile(Gram_matrix, para_dict['weight_threshold_percentile'])] = 0
+        elif 'weight_threshold' in para_dict.keys():
+            Gram_matrix_[Gram_matrix_ < para_dict['weight_threshold']] = 0
         G_population = nx.from_numpy_array(Gram_matrix_)
     elif PopulationGraph_type == "knn_graph":
         for i in range(Gram_matrix_.shape[0]):
