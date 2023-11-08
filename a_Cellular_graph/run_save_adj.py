@@ -10,7 +10,7 @@ from CellGraph import Pos2Adj
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--study", type=str, default="Danenberg", help="Dataset")
-parser.add_argument("--cohort", type=int, default=1, help="Cohort 1 or 2")
+parser.add_argument("--Subset", type=int, default=1, help="subset 1 or 2")
 args = parser.parse_args()
 print(args)
 
@@ -27,15 +27,15 @@ elif args.study == "Danenberg":
     if args.cohort == 1:
         Patient_ids = [
             patient_id
-            for patient_id in list(clinical.loc[clinical["isDiscovery"], "patient_id"])
+            for patient_id in list(clinical.loc[clinical["Subset_id"] == 1, "patient_id"])
         ]
     elif args.cohort == 2:
         Patient_ids = [
             patient_id
-            for patient_id in list(clinical.loc[~clinical["isDiscovery"], "patient_id"])
+            for patient_id in list(clinical.loc[clinical["Subset_id"] == 2, "patient_id"])
         ]
     else:
-        raise ValueError("Invalid cohort number")
+        raise ValueError("Invalid subset number")
 else:
     raise ValueError("Invalid study name")
 # -------------------------------------------------------------------------
@@ -45,7 +45,7 @@ if args.study == "Danenberg":
         "Output",
         "a_Cellular_graph",
         "Danenberg",
-        "Cohort_" + str(args.cohort),
+        "Subset_" + str(args.Subset),
     )
 elif args.study == "Jackson":
     OUTPUT_ROOT = os.path.join(PROJECT_ROOT, "Output", "a_Cellular_graph", "Jackson")
@@ -79,7 +79,7 @@ for file_name in FILE_NAMES:
         ),
         Adj,
     )
-    print(f"Saving {file_name} to {args.study} cohort {args.cohort}")
+    print(f"Saving {file_name} to {args.study} subset {args.subset}")
 
 
 # (cell-gnn) zwang@io86:~/Projects/BiGraph/Input/Single-cell/Danenberg$ ls ../../../Output/a_Cellular_graph/Danenberg/Cohort_1 | wc -l
