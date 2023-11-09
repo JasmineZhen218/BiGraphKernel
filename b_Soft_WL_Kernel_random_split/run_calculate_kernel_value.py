@@ -14,7 +14,7 @@ parser.add_argument(
     "--iteration", type=int, default=2, help="Iteration of neighborhood aggregation"
 )
 parser.add_argument(
-    "--k", type=int, default=100, help="Neighbor of neighborhood in PhenoGraph"
+    "--k", type=int, default=200, help="Neighbor of neighborhood in PhenoGraph"
 )
 args = parser.parse_args()
 print(args)
