@@ -11,10 +11,10 @@ import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--iteration", type=int, default=2, help="Iteration of neighborhood aggregation"
+    "--iteration", type=int, default=5, help="Iteration of neighborhood aggregation"
 )
 parser.add_argument(
-    "--k", type=int, default=200, help="Neighbor of neighborhood in PhenoGraph"
+    "--k", type=int, default=500, help="Neighbor of neighborhood in PhenoGraph"
 )
 args = parser.parse_args()
 print(args)

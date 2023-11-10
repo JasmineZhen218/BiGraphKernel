@@ -17,6 +17,7 @@ def get_cell_phenotype_id(dataset):
             "MHC I^{hi}CD57^{+}": 13,
             "MHC^{hi}CD15^{+}": 14,
             "CD15^{+}": 15,
+            
             "CD4^{+} T cells & APCs": 16,
             "CD4^{+} T cells": 17,
             "CD8^{+} T cells": 18,
