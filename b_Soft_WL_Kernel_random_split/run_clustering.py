@@ -17,6 +17,12 @@ parser.add_argument(
 parser.add_argument(
     "--k", type=int, default=30, help="Neighbor of neighborhood in PhenoGraph"
 )
+parser.add_argument(
+    "--node_label",
+    type=str,
+    default="CellType",
+    help="node label: cell_type or cell-category",
+)
 args = parser.parse_args()
 
 
@@ -42,6 +48,7 @@ for i in range(len(FILE_NAMES)):
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
+            args.node_label,
             "X" + str(args.iteration) + ".npy",
         )
     )
@@ -74,6 +81,7 @@ for i in range(len(FILE_NAMES)):
             "Subtrees",
             file_name,
             "pattern_ids",
+            args.node_label,
         ),
         exist_ok=True,
     )
@@ -89,6 +97,7 @@ for i in range(len(FILE_NAMES)):
             "Subtrees",
             file_name,
             "pattern_ids",
+            args.node_label,
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"

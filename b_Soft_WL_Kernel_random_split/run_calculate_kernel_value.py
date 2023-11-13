@@ -16,6 +16,12 @@ parser.add_argument(
 parser.add_argument(
     "--k", type=int, default=500, help="Neighbor of neighborhood in PhenoGraph"
 )
+parser.add_argument(
+    "--node_label",
+    type=str,
+    default="CellType",
+    help="node label: cell_type or cell-category",
+)
 args = parser.parse_args()
 print(args)
 
@@ -40,6 +46,7 @@ for i in range(len(FILE_NAMES)):
             "Subtrees",
             file_name,
             "pattern_ids",
+            args.node_label,
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
@@ -70,6 +77,7 @@ for i in range(len(FILE_NAMES)):
             "Subtrees",
             file_name,
             "pattern_ids",
+            args.node_label,
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
@@ -115,6 +123,8 @@ pickle.dump(
             + str(args.iteration)
             + "_PhenoGraph_k_"
             + str(args.k)
+            +"_"
+            + args.node_label
             + ".pkl",
         ),
         "wb",
@@ -123,37 +133,37 @@ pickle.dump(
 print("Saving Gram matrix", Gram_matrix.shape)
 
 # Save histohgrams for each patient
-for patient_id in Patient_ids:
-    histogram = Histogram_dict[patient_id]
-    os.makedirs(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Danenberg",
-            "Subset_1",
-            "Histograms",
-            "patient_" + str(patient_id),
-        ),
-        exist_ok=True,
-    )
-    np.save(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Danenberg",
-            "Subset_1",
-            "Histograms",
-            "patient_" + str(patient_id),
-            "histogram_iter_"
-            + str(args.iteration)
-            + "PhenoGraph_k_"
-            + str(args.k)
-            + ".npy",
-        ),
-        histogram,
-    )
+# for patient_id in Patient_ids:
+#     histogram = Histogram_dict[patient_id]
+#     os.makedirs(
+#         os.path.join(
+#             PROJECT_ROOT,
+#             "Output",
+#             "b_Soft_WL_Kernel_random_split",
+#             "Danenberg",
+#             "Subset_1",
+#             "Histograms",
+#             "patient_" + str(patient_id),
+#         ),
+#         exist_ok=True,
+#     )
+#     np.save(
+#         os.path.join(
+#             PROJECT_ROOT,
+#             "Output",
+#             "b_Soft_WL_Kernel_random_split",
+#             "Danenberg",
+#             "Subset_1",
+#             "Histograms",
+#             "patient_" + str(patient_id),
+#             "histogram_iter_"
+#             + str(args.iteration)
+#             + "PhenoGraph_k_"
+#             + str(args.k)
+#             + ".npy",
+#         ),
+#         histogram,
+#     )
     # f, ax = plt.subplots(figsize=(5, 3))
     # ax.bar(np.arange(len(histogram)), histogram)
     # ax.set_xlabel("Pattern ID")

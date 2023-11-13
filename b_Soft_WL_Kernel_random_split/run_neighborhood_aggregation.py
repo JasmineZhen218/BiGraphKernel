@@ -10,6 +10,12 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--study", type=str, default="Danenberg", help="Dataset")
 parser.add_argument("--Subset", type=int, default=1, help="Subset 1 or 2")
+parser.add_argument(
+    "--node_label",
+    type=str,
+    default="CellType",
+    help="node label: cell_type or cell-category",
+)
 args = parser.parse_args()
 print(args)
 
@@ -58,6 +64,7 @@ for file_name in FILE_NAMES:
             OUTPUT_ROOT,
             file_name,
             "neighborhood_aggregation",
+            args.node_label,
         ),
         exist_ok=True,
     )
@@ -74,7 +81,7 @@ for file_name in FILE_NAMES:
                 PROJECT_ROOT,
                 INPUT_ROOT,
                 file_name,
-                "matched_CellType_centroid_alignment.npy",
+                "matched_" + args.node_label + "_centroid_alignment.npy",
             )
         ).reshape(-1)
     elif args.study == "Danenberg":
@@ -83,19 +90,30 @@ for file_name in FILE_NAMES:
                 PROJECT_ROOT,
                 INPUT_ROOT,
                 file_name,
-                "CellType.npy",
+                args.node_label + ".npy",
             )
         ).reshape(-1)
-#--------------------------------------------------------------------------
-    X0 = np.zeros((Adj.shape[0], 32))
-    for i in range(32):
-        X0[CellType == i, i] = 1
+    # --------------------------------------------------------------------------
+    if args.node_label == "CellType":
+        X0 = np.zeros((Adj.shape[0], 32))
+        for i in range(32):
+            X0[CellType == i, i] = 1
+    elif args.node_label == "CellCategory":
+        X0 = np.zeros((Adj.shape[0], 3))
+        for i in range(3):
+            X0[CellType == i, i] = 1
+    elif args.node_label == "TMECellType":
+        print(np.unique(CellType))
+        X0 = np.zeros((Adj.shape[0], 17))
+        for i in range(17):
+            X0[CellType == i, i] = 1
     if args.study == "Jackson":
         np.save(
             os.path.join(
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "matched_X0_centroid_alignment.npy",
             ),
             X0,
@@ -106,12 +124,13 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "X0.npy",
             ),
             X0,
         )
     print(f"Saved X0.npy")
-#--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     X = neighborhood_aggregation(X0, Adj, 1)
     if args.study == "Jackson":
         np.save(
@@ -119,6 +138,7 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "matched_X1_centroid_alignment.npy",
             ),
             X,
@@ -129,12 +149,13 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "X1.npy",
             ),
             X,
         )
     print(f"Saved X1.npy")
-#--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     X = neighborhood_aggregation(X, Adj, 1)
     if args.study == "Jackson":
         np.save(
@@ -142,6 +163,7 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "matched_X2_centroid_alignment.npy",
             ),
             X,
@@ -152,12 +174,13 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "X2.npy",
             ),
             X,
         )
     print(f"Saved X2.npy")
-#--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     X = neighborhood_aggregation(X, Adj, 1)
     if args.study == "Jackson":
         np.save(
@@ -165,6 +188,7 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "matched_X3_centroid_alignment.npy",
             ),
             X,
@@ -175,12 +199,13 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "X3.npy",
             ),
             X,
         )
     print(f"Saved X3.npy")
-#--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     X = neighborhood_aggregation(X, Adj, 1)
     if args.study == "Jackson":
         np.save(
@@ -188,6 +213,7 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "matched_X4_centroid_alignment.npy",
             ),
             X,
@@ -198,12 +224,13 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "X4.npy",
             ),
             X,
         )
     print(f"Saved X4.npy")
-#--------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     X = neighborhood_aggregation(X, Adj, 1)
     if args.study == "Jackson":
         np.save(
@@ -211,6 +238,7 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "matched_X5_centroid_alignment.npy",
             ),
             X,
@@ -221,12 +249,13 @@ for file_name in FILE_NAMES:
                 OUTPUT_ROOT,
                 file_name,
                 "neighborhood_aggregation",
+                args.node_label,
                 "X5.npy",
             ),
             X,
         )
     print(f"Saved X5.npy")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 # print("Cohort 2")
 # FILE_NAMES = os.listdir(

@@ -68,19 +68,20 @@ for file_name in FILE_NAMES:
     )
     df = pd.read_csv(os.path.join(INPUT_ROOT, file_name))
     CellType = df["cell_type_id"].values.reshape(-1)
-    CellCategory = np.zeros_like(CellType)
+    TMECellType = np.zeros_like(CellType)
     # 
-    CellCategory[CellType<=15] = 0 # tumor
-    CellCategory[(CellType>15)&(CellType<=26)] = 1 # immune
-    CellCategory[CellType>26] = 2 # stromal
+    TMECellType[CellType<=15] = 0 # tumor
+    for i in range(16,32):
+        TMECellType[CellType==i] = i-15 # TME cells
+
 
     np.save(
         os.path.join(
             OUTPUT_ROOT,
             file_name.split(".csv")[0],
-            "CellCategory.npy",
+            "TMECellType.npy",
         ),
-        CellCategory,
+        TMECellType,
     )
     print(f"Saving {file_name} to {args.study} cohort {args.Subset}")
 

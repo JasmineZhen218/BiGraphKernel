@@ -17,6 +17,13 @@ parser.add_argument(
 parser.add_argument(
     "--method", type=str, default='centroid', help="Method for cell type alignment"
 )
+parser.add_argument(
+    "--node_label",
+    type=str,
+    default="CellType",
+    help="node label: cell_type or cell-category",
+)
+
 args = parser.parse_args()
 print(args)
 
@@ -40,6 +47,7 @@ for i in range(len(FILE_NAMES)):
             "Subtrees",
             file_name,
             "matched_pattern_ids_centroid_alignment",
+            args.node_label,
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
@@ -70,6 +78,7 @@ for i in range(len(FILE_NAMES)):
             "Subtrees",
             file_name,
             "matched_pattern_ids_centroid_alignment",
+            args.node_label,
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
@@ -113,42 +122,44 @@ pickle.dump(
             + str(args.iteration)
             + "_PhenoGraph_k_"
             + str(args.k)
+            +'_'
+            +args.node_label
             + "_centroid_alignment.pkl",
         ),
         "wb",
     ),
 )
 
-# Save histohgrams for each patient
-for patient_id in Patient_ids:
-    histogram = Histogram_dict[patient_id]
-    os.makedirs(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Danenberg",
-            "Subset_2",
-            "Matched_Histograms_centroid_alignment",
-            "patient_" + str(patient_id),
-        ),
-        exist_ok=True,
-    )
-    np.save(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Danenberg",
-            "Subset_2",
-            "Matched_Histograms_centroid_alignment",
-            "patient_" + str(patient_id),
-            "histogram_iter_"
-            + str(args.iteration)
-            + "_PhenoGraph_k_"
-            + str(args.k)
-            + ".npy",
-        ),
-        histogram,
-    )
-    print("Saving histogram for patient", patient_id, histogram.shape)
+# # Save histohgrams for each patient
+# for patient_id in Patient_ids:
+#     histogram = Histogram_dict[patient_id]
+#     os.makedirs(
+#         os.path.join(
+#             PROJECT_ROOT,
+#             "Output",
+#             "b_Soft_WL_Kernel_random_split",
+#             "Danenberg",
+#             "Subset_2",
+#             "Matched_Histograms_centroid_alignment",
+#             "patient_" + str(patient_id),
+#         ),
+#         exist_ok=True,
+#     )
+#     np.save(
+#         os.path.join(
+#             PROJECT_ROOT,
+#             "Output",
+#             "b_Soft_WL_Kernel_random_split",
+#             "Danenberg",
+#             "Subset_2",
+#             "Matched_Histograms_centroid_alignment",
+#             "patient_" + str(patient_id),
+#             "histogram_iter_"
+#             + str(args.iteration)
+#             + "_PhenoGraph_k_"
+#             + str(args.k)
+#             + ".npy",
+#         ),
+#         histogram,
+#     )
+#     print("Saving histogram for patient", patient_id, histogram.shape)

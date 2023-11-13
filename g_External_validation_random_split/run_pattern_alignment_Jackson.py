@@ -24,6 +24,12 @@ parser.add_argument(
     default="centroid",
     help="Method for cell type alignment, knn or centroid",
 )
+parser.add_argument(
+    "--node_label",
+    type=str,
+    default="CellType",
+    help="node label: cell_type or cell-category",
+)
 
 args = parser.parse_args()
 # -------------------------------------------------------------
@@ -50,6 +56,7 @@ for i in range(len(FILE_NAMES_Reference)):
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
+            args.node_label,
             "X" + str(args.iteration) + ".npy",
         )
     )
@@ -63,6 +70,7 @@ for i in range(len(FILE_NAMES_Reference)):
             "Subtrees",
             file_name,
             "pattern_ids",
+            args.node_label,
             "pattern_id_iter_"
             + str(args.iteration)
             + "_PhenoGraph_k_"
@@ -94,6 +102,8 @@ for i in range(len(FILE_NAMES_Query)):
             "Subtrees",
             file_name,
             "neighborhood_aggregation",
+            args.node_label,
+            
             "matched_X" + str(args.iteration) + "_centroid_alignment.npy",
         )
     )
@@ -145,6 +155,7 @@ for i in range(len(FILE_NAMES_Query)):
                 "Subtrees",
                 file_name,
                 "matched_pattern_ids_knn_alignment",
+                args.node_label,
             ),
             exist_ok=True,
         )
@@ -157,6 +168,7 @@ for i in range(len(FILE_NAMES_Query)):
                 "Subtrees",
                 file_name,
                 "matched_pattern_ids_knn_alignment",
+                args.node_label,
                 "pattern_id_iter_"
                 + str(args.iteration)
                 + "_PhenoGraph_k_"
@@ -176,6 +188,7 @@ for i in range(len(FILE_NAMES_Query)):
                 "Subtrees",
                 file_name,
                 "matched_pattern_ids_centroid_alignment",
+                args.node_label,
             ),
             exist_ok=True,
         )
@@ -188,6 +201,7 @@ for i in range(len(FILE_NAMES_Query)):
                 "Subtrees",
                 file_name,
                 "matched_pattern_ids_centroid_alignment",
+                args.node_label,
                 "pattern_id_iter_"
                 + str(args.iteration)
                 + "_PhenoGraph_k_"
