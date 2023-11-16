@@ -1,3 +1,83 @@
+def get_tmecell_phenotype_id(dataset):
+    if dataset == "Danenberg":
+        cell_phenotype_id = {
+            "CK^{med}ER^{lo}": 0,
+            "ER^{hi}CXCL12^{+}": 0,
+            "CK^{lo}ER^{lo}": 0,
+            "Ep Ki67^{+}": 0,
+            "CK^{lo}ER^{med}": 0,
+            "Ep CD57^{+}": 0,
+            "MHC I & II^{hi}": 0,
+            "Basal": 0,
+            "HER2^{+}": 0,
+            "CK8-18^{hi}CXCL12^{hi}": 0,
+            "CK^{+} CXCL12^{+}": 0,
+            "CK8-18^{hi}ER^{lo}": 0,
+            "CK8-18^{+} ER^{hi}": 0,
+            "MHC I^{hi}CD57^{+}": 0,
+            "MHC^{hi}CD15^{+}": 0,
+            "CD15^{+}": 0,
+            
+            "CD4^{+} T cells & APCs": 1,
+            "CD4^{+} T cells": 2,
+            "CD8^{+} T cells": 3,
+            "T_{Reg} & T_{Ex}": 4,
+            "B cells": 5,
+            "CD38^{+} lymphocytes": 6,
+            "Macrophages": 7,
+            "Granulocytes": 8,
+            "Macrophages & granulocytes": 9,
+            "CD57^{+}": 10,
+            "Ki67^{+}": 11,
+            
+            "Endothelial": 12,
+            "Fibroblasts": 13,
+            "Fibroblasts FSP1^{+}": 14,
+            "Myofibroblasts PDPN^{+}": 15,
+            "Myofibroblasts": 16,
+        }
+        return cell_phenotype_id
+
+def get_cell_category_id(dataset):
+    if dataset == "Danenberg":
+        cell_phenotype_id = {
+            "CK^{med}ER^{lo}": 0,
+            "ER^{hi}CXCL12^{+}": 0,
+            "CK^{lo}ER^{lo}": 0,
+            "Ep Ki67^{+}": 0,
+            "CK^{lo}ER^{med}": 0,
+            "Ep CD57^{+}": 0,
+            "MHC I & II^{hi}": 0,
+            "Basal": 0,
+            "HER2^{+}": 0,
+            "CK8-18^{hi}CXCL12^{hi}": 0,
+            "CK^{+} CXCL12^{+}": 0,
+            "CK8-18^{hi}ER^{lo}": 0,
+            "CK8-18^{+} ER^{hi}": 0,
+            "MHC I^{hi}CD57^{+}": 0,
+            "MHC^{hi}CD15^{+}": 0,
+            "CD15^{+}": 0,
+            
+            "CD4^{+} T cells & APCs": 1,
+            "CD4^{+} T cells": 1,
+            "CD8^{+} T cells": 1,
+            "T_{Reg} & T_{Ex}": 1,
+            "B cells": 1,
+            "CD38^{+} lymphocytes": 1,
+            "Macrophages": 1,
+            "Granulocytes": 1,
+            "Macrophages & granulocytes": 1,
+            "CD57^{+}": 1,
+            "Ki67^{+}": 1,
+            
+            "Endothelial": 2,
+            "Fibroblasts": 2,
+            "Fibroblasts FSP1^{+}": 2,
+            "Myofibroblasts PDPN^{+}": 2,
+            "Myofibroblasts": 2,
+        }
+        return cell_phenotype_id
+
 def get_cell_phenotype_id(dataset):
     if dataset == "Danenberg":
         cell_phenotype_id = {

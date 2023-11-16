@@ -1,42 +1,19 @@
-Iter = 1, PhenoGraph_k = 30, knn_graph (percentile=95,k=3), Overall Survival, Number of Groups = 11, p-value = 0.00013
-Iter = 2, PhenoGraph_k = 30, knn_graph (percentile=95,k=15), Overall Survival, Number of Groups = 11, p-value = 0.00003
-Iter = 2, PhenoGraph_k = 30, two_step_knn_graph (percentile=95,k=5), Overall Survival, Number of Groups = 12, p-value = 0.00058
-Iter = 2, PhenoGraph_k = 30, two_step_knn_graph (percentile=95,k=10), Overall Survival, Number of Groups = 11, p-value = 0.00017
-Iter = 2, PhenoGraph_k = 30, complete_graph_with_weak_edges_removed (percentile=95,k=10), Disease-specific Survival, Number of Groups = 8, p-value = 0.00019
-Iter = 2, PhenoGraph_k = 30, knn_graph (percentile=95,k=15), Disease-specific Survival, Number of Groups = 11, p-value = 0.00076
-Iter = 3, PhenoGraph_k = 30, knn_graph (percentile=95,k=10), Relapse-free Survival, Number of Groups = 12, p-value = 0.00026
-Iter = 3, PhenoGraph_k = 30, knn_graph (percentile=95,k=10), Disease-specific Survival, Number of Groups = 12, p-value = 0.00062
-Iter = 3, PhenoGraph_k = 30, knn_graph (percentile=95,k=10), Relapse-free Survival, Number of Groups = 12, p-value = 0.00026
+
+iteration: 1, PhenoGraph_k: 30, knn_k: 20
+[Subset 2, Presentation] Pattern: 63, subgroup_id: 1, HR: 1.2980019977054291, p: 0.002707006494888244
+[Jackson, Overall, Presentation] Pattern: 63, subgroup_id: 1, HR: 1.3918703514071213, p: 0.00013925833536082352
+---------------------------------------------
+iteration: 5, PhenoGraph_k: 30, knn_k: 20
+[Subset 2, Presentation] Pattern: 39, subgroup_id: 2, HR: 1.3216748422316562, p: 0.009423221376788934
+[Jackson, Overall, Presentation] Pattern: 39, subgroup_id: 2, HR: 1.2325345331963053, p: 0.011616758736878908
+---------------------------------------------
 
 
-Iter = 1, PhenoGraph_k = 30, complete_graph (percentile=95,k=10), Overall Survival, Number of Groups = 5, p-value = 0.00117
-Iter = 1, PhenoGraph_k = 30, complete_graph_with_weak_edges_removed (percentile=50,k=10), Overall Survival, Number of Groups = 5, p-value = 0.00134
-Iter = 3, PhenoGraph_k = 100, knn_graph (percentile=95,k=5), Disease-specific Survival, Number of Groups = 11, p-value = 0.00133
-Iter = 1, PhenoGraph_k = 30, complete_graph_with_weak_edges_removed (percentile=90,k=10), Overall Survival, Number of Groups = 9, p-value = 0.00441
-Iter = 1, PhenoGraph_k = 30, complete_graph_with_weak_edges_removed (percentile=75,k=10), Overall Survival, Number of Groups = 6, p-value = 0.00427
-Iter = 1, PhenoGraph_k = 30, two_step_knn_graph (percentile=95,k=10), Overall Survival, Number of Groups = 10, p-value = 0.00486
-Iter = 1, PhenoGraph_k = 30, complete_graph_with_weak_edges_removed (percentile=65,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00386
-Iter = 1, PhenoGraph_k = 30, complete_graph_with_weak_edges_removed (percentile=60,k=10), Relapse-free Survival, Number of Groups = 6, p-value = 0.00388
-Iter = 2, PhenoGraph_k = 100,  (percentile=90,k=10), Relapse-free Survival, Number of Groups = 9, p-value = 0.00485
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=70,k=10), Rcomplete_graph_with_weak_edges_removedelapse-free Survival, Number of Groups = 5, p-value = 0.00319
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=50,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00391
-Iter = 2, PhenoGraph_k = 100, two_step_knn_graph (percentile=95,k=25), Relapse-free Survival, Number of Groups = 8, p-value = 0.00231
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=90,k=10), Relapse-free Survival, Number of Groups = 9, p-value = 0.00485
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=70,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00319
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=50,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00391
-Iter = 2, PhenoGraph_k = 100, two_step_knn_graph (percentile=95,k=25), Relapse-free Survival, Number of Groups = 8, p-value = 0.00231
-Iter = 2, PhenoGraph_k = 100, two_step_knn_graph (percentile=95,k=30), Relapse-free Survival, Number of Groups = 7, p-value = 0.00554
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=90,k=10), Relapse-free Survival, Number of Groups = 9, p-value = 0.00485
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=70,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00319
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=50,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00391
-Iter = 2, PhenoGraph_k = 100, two_step_knn_graph (percentile=95,k=25), Relapse-free Survival, Number of Groups = 8, p-value = 0.00231
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=90,k=10), Relapse-free Survival, Number of Groups = 9, p-value = 0.00485
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=70,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00319
-Iter = 2, PhenoGraph_k = 100, complete_graph_with_weak_edges_removed (percentile=50,k=10), Relapse-free Survival, Number of Groups = 5, p-value = 0.00391
-r = 2, PhenoGraph_k = 100, two_step_knn_graph (percentile=95,k=25), Relapse-free Survival, Number of Groups = 8, p-value = 0.00231
-
-Iter = 3, PhenoGraph_k = 100, two_step_knn_graph (percentile=95,k=25), Disease-specific Survival, Number of Groups = 7, p-value = 0.00454
-
-Iter = 3, PhenoGraph_k = 100, two_step_knn_graph (percentile=95,k=25), Disease-specific Survival, Number of Groups = 7, p-value = 0.00454
-Iter = 4, PhenoGraph_k = 100, knn_graph (percentile=95,k=10), Disease-specific Survival, Number of Groups = 10, p-value = 0.00425
-Iter = 4, PhenoGraph_k = 100, knn_graph (percentile=95,k=25), Disease-specific Survival, Number of Groups = 8, p-value = 0.00357
+iteration: 2, PhenoGraph_k: 100, knn_k: 40
+[Subset 2, Existence] Pattern: 13, subgroup_id: 5, HR: 0.49515273154514994, p: 0.007014131293582907
+[Jackson, Overall, Existence] Pattern: 13, subgroup_id: 5, HR: 0.4970301991149107, p: 0.0058284622294105266
+---------------------------------------------
+iteration: 2, PhenoGraph_k: 200, knn_k: 30
+[Subset 2, Existence] Pattern: 6, subgroup_id: 7, HR: 0.5162644348825436, p: 0.009921324692843115
+[Jackson, Overall, Existence] Pattern: 6, subgroup_id: 7, HR: 0.5378682913255804, p: 0.008917920812655173
+---------------------------------------------

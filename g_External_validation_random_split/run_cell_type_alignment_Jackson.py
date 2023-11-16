@@ -24,7 +24,7 @@ parser.add_argument(
 parser.add_argument(
     "--node_label",
     type=str,
-    default="CellType",
+    default="TMECellType",
     help="node label: cell_type or cell-category",
 )
 

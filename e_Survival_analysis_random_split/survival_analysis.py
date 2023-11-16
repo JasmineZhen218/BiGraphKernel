@@ -3,7 +3,7 @@ import pandas as pd
 from lifelines import CoxPHFitter
 
 
-def calculate_hazard_ratio(length, status, community_id):
+def calculate_hazard_ratio(length, status, community_id, adjust_dict = {}):
     """
     Calculate hazard ratio for each community
     :param length: length of follow-up
@@ -16,10 +16,13 @@ def calculate_hazard_ratio(length, status, community_id):
     cph = CoxPHFitter()
     unique_community_id = np.unique(community_id[community_id != 0])
     for i in unique_community_id:
-        cph.fit(
-            pd.DataFrame(
+        DF = pd.DataFrame(
                 {"length": length, "status": status, "community": community_id == i}
-            ),
+            )
+        for key, value in adjust_dict.items():
+            DF[key] = value
+        cph.fit(
+            DF,
             duration_col="length",
             event_col="status",
             show_progress=False,

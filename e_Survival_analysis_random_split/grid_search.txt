@@ -1067,3 +1067,17 @@ Iter = 1, PhenoGraph_k = 30, knn_graph (percentile=95,k=20), Overall Survival, N
 Iter = 1, PhenoGraph_k = 30, knn_graph (percentile=95,k=25), Overall Survival, Number of Groups = 8, p-value = 0.06823
 Iter = 1, PhenoGraph_k = 30, knn_graph (percentile=95,k=30), Overall Survival, Number of Groups = 8, p-value = 0.12030
 Iter = 1, PhenoGraph_k = 30, two_step_knn_graph (percentile=95,k=3), Overall Survival, Number of Groups = 10, p-value = 0.01420
+---------------------------------------------
+iteration: 1, PhenoGraph_k: 30, knn_k: 5
+[Subset 2, Presentation] Pattern: 134, subgroup_id: 1, HR: 1.2978419695579484, p: 0.006192055108410125
+[Subset 2, Presentation] Pattern: 114, subgroup_id: 1, HR: 1.2463425734940496, p: 0.00607033026533655
+[Subset 2, Presentation] Pattern: 115, subgroup_id: 1, HR: 1.328235099721866, p: 0.004088511489759
+[Subset 2, Presentation] Pattern: 118, subgroup_id: 1, HR: 1.3948278406713788, p: 0.0006431234752009139
+[Subset 2, Presentation] Pattern: 63, subgroup_id: 1, HR: 1.2980019977054291, p: 0.002707006494888244
+[Subset 2, Existence] Pattern: 132, subgroup_id: 1, HR: 2.8559896087153227, p: 0.0011638600561499075
+[Subset 2, Existence] Pattern: 115, subgroup_id: 1, HR: 2.627627686985523, p: 0.0037846786267717474
+[Subset 2, Existence] Pattern: 63, subgroup_id: 1, HR: 2.2798614736983165, p: 0.0017842231418169192
+[Subset 2, Existence] Pattern: 128, subgroup_id: 1, HR: 3.0554965732158257, p: 0.00037424971788043685
+[Jackson, Overall, Presentation] Pattern: 27, subgroup_id: 1, HR: 1.3068641813440212, p: 0.00046169447982943065
+[Jackson, Overall, Presentation] Pattern: 63, subgroup_id: 1, HR: 1.3918703514071213, p: 0.00013925833536082352
+[Jackson, Overall, Existence] Pattern: 114, subgroup_id: 1, HR: 2.157611004676564, p: 0.005190931739352844
