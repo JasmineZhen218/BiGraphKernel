@@ -40,9 +40,14 @@ def construct_PopulationGraph(Gram_matrix, PopulationGraph_type, para_dict={}):
             for j in range(Gram_matrix_.shape[0]):
                 neighbor_i = np.where(adj_1[i, :] > 0)[0]
                 neighbor_j = np.where(adj_1[j, :] > 0)[0]
-                weight = len(set(neighbor_i).intersection(set(neighbor_j))) / len(
+                if len(
                     set(neighbor_i).union(set(neighbor_j))
-                )
+                ) == 0:
+                    weight = 0
+                else:
+                    weight = len(set(neighbor_i).intersection(set(neighbor_j))) / len(
+                        set(neighbor_i).union(set(neighbor_j))
+                    )
                 adj_2[i, j] = weight
         np.fill_diagonal(adj_2, 0)
         G_population = nx.from_numpy_array(adj_2)

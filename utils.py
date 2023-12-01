@@ -108,3 +108,8 @@ def process_Jackson_clinical_data(DF_clinical):
             DF_clinical.loc[index, "HR-/HER2+"] = 0
             DF_clinical.loc[index, "TNBC"] = 1
     return DF_clinical
+
+
+
+def reverse_dict(D):
+    return {v: k for k, v in D.items()}

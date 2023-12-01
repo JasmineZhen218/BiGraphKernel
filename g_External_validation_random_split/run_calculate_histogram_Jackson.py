@@ -1,5 +1,6 @@
 import os
 import sys
+
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from utils import PROJECT_ROOT
 import numpy as np
@@ -9,18 +10,18 @@ import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--iteration", type=int, default=2, help="Iteration of neighborhood aggregation"
+    "--iteration", type=int, default=0, help="Iteration of neighborhood aggregation"
 )
 parser.add_argument(
     "--k", type=int, default=100, help="Neighbor of neighborhood in PhenoGraph"
 )
 parser.add_argument(
-    "--method", type=str, default='centroid', help="Method for cell type alignment"
+    "--method", type=str, default="centroid", help="Method for cell type alignment"
 )
 parser.add_argument(
     "--node_label",
     type=str,
-    default="CellType",
+    default="CellCategory",
     help="node label: cell_type or cell-category",
 )
 args = parser.parse_args()
@@ -36,23 +37,35 @@ FILE_NAMES = os.listdir(
 Pattern_ids = []
 for i in range(len(FILE_NAMES)):
     file_name = FILE_NAMES[i]
-    pattern_ids = np.load(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Jackson",
-            "Subtrees",
-            file_name,
-            "matched_pattern_ids_centroid_alignment",
-            args.node_label,
-            "pattern_id_iter_"
-            + str(args.iteration)
-            + "_PhenoGraph_k_"
-            + str(args.k)
-            + ".npy",
+    if args.iteration == 0:
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "a_Cellular_graph_random_split",
+                "Jackson",
+                file_name,
+                "matched_" + args.node_label + "_centroid_alignment.npy",
+            )
         )
-    )
+    else:
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "b_Soft_WL_Kernel_random_split",
+                "Jackson",
+                "Subtrees",
+                file_name,
+                "matched_pattern_ids_centroid_alignment",
+                args.node_label,
+                "pattern_id_iter_"
+                + str(args.iteration)
+                + "_PhenoGraph_k_"
+                + str(args.k)
+                + ".npy",
+            )
+        )
     Pattern_ids.append(pattern_ids)
     print(f"Loading {file_name}", pattern_ids.shape)
 assert len(Pattern_ids) == len(FILE_NAMES)
@@ -66,23 +79,35 @@ Histogram_dict = {}
 for i in range(len(FILE_NAMES)):
     file_name = FILE_NAMES[i]
     patient_id = int(file_name.split("_")[1])
-    pattern_ids = np.load(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Jackson",
-            "Subtrees",
-            file_name,
-            "matched_pattern_ids_centroid_alignment",
-            args.node_label,
-            "pattern_id_iter_"
-            + str(args.iteration)
-            + "_PhenoGraph_k_"
-            + str(args.k)
-            + ".npy",
+    if args.iteration == 0:
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "a_Cellular_graph_random_split",
+                "Jackson",
+                file_name,
+                "matched_" + args.node_label + "_centroid_alignment.npy",
+            )
         )
-    )
+    else:
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "b_Soft_WL_Kernel_random_split",
+                "Jackson",
+                "Subtrees",
+                file_name,
+                "matched_pattern_ids_centroid_alignment",
+                args.node_label,
+                "pattern_id_iter_"
+                + str(args.iteration)
+                + "_PhenoGraph_k_"
+                + str(args.k)
+                + ".npy",
+            )
+        )
     histogram = np.zeros(num_unique_patterns)
     for j in range(num_unique_patterns):
         histogram[j] = np.sum(pattern_ids == j)
@@ -106,6 +131,25 @@ SoftWL_dict = {
     "Patient_id": Patient_ids,
     "Histogram": Histograms,
 }
+if args.iteration == 0:
+    pickle.dump(
+        SoftWL_dict,
+        open(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "b_Soft_WL_Kernel_random_split",
+                "Jackson",
+                "Matched_SoftWL_dict_iter_"
+                + str(args.iteration)
+                + "_"
+                + args.node_label
+                + "_centroid_alignment.pkl",
+            ),
+            "wb",
+        ),
+    )
+
 pickle.dump(
     SoftWL_dict,
     open(
@@ -118,7 +162,7 @@ pickle.dump(
             + str(args.iteration)
             + "_PhenoGraph_k_"
             + str(args.k)
-            +'_'
+            + "_"
             + args.node_label
             + "_centroid_alignment.pkl",
         ),

@@ -148,45 +148,45 @@ for iteration in range(1, 6):
                     Subgroup_ids_[Community_ids_ == HR[i]["community_id"]] = i + 1
                     HR[i]["subgroup_id"] = i + 1
 
-                Overpresented_patterns = {}
-                Candiates_overpresented_in_subgroup = []
-                from scipy import stats
+                # Overpresented_patterns = {}
+                # Candiates_overpresented_in_subgroup = []
+                # from scipy import stats
 
-                for hr_dict in HR:
-                    subgroup_id = hr_dict["subgroup_id"]
-                    hr = hr_dict["hr"]
-                    p = hr_dict["p"]
-                    if p < 0.05 :
-                        Overpresented_patterns[subgroup_id] = []
-                        Histogram_intra_group = Histograms_[
-                            Subgroup_ids_ == subgroup_id
-                        ]
-                        for other_subgroup_id in [
-                            i for i in range(1, len(HR) + 1) if i != subgroup_id
-                        ]:
-                            Histogram_other_group = Histograms_[
-                                Subgroup_ids_ == other_subgroup_id
-                            ]
-                            candidates = []
-                            for i in range(Histograms_.shape[1]):
-                                rvsi = Histogram_intra_group[:, i]
-                                rvso = Histogram_other_group[:, i]
-                                result = stats.mannwhitneyu(rvsi, rvso)
-                                if (result.pvalue < 0.05 ) and (
-                                    np.median(rvsi) > np.median(rvso)
-                                ):
-                                    candidates.append(i)
-                            Overpresented_patterns[subgroup_id].append(set(candidates))
-                        Overpresented_patterns[subgroup_id] = list(
-                            set.intersection(*Overpresented_patterns[subgroup_id])
-                        )
-                for subgroup_id, Candidates in Overpresented_patterns.items():
-                    print(
-                        "subgroup_id: {} (N = {}), hr = {:.4f}, p = {:.4f}".format(
-                            subgroup_id, np.sum(Subgroup_ids_ == subgroup_id), HR[subgroup_id - 1]["hr"], HR[subgroup_id - 1]["p"]
-                        )
-                    )
-                    print(Candidates)
+                # for hr_dict in HR:
+                #     subgroup_id = hr_dict["subgroup_id"]
+                #     hr = hr_dict["hr"]
+                #     p = hr_dict["p"]
+                #     if p < 0.05 :
+                #         Overpresented_patterns[subgroup_id] = []
+                #         Histogram_intra_group = Histograms_[
+                #             Subgroup_ids_ == subgroup_id
+                #         ]
+                #         for other_subgroup_id in [
+                #             i for i in range(1, len(HR) + 1) if i != subgroup_id
+                #         ]:
+                #             Histogram_other_group = Histograms_[
+                #                 Subgroup_ids_ == other_subgroup_id
+                #             ]
+                #             candidates = []
+                #             for i in range(Histograms_.shape[1]):
+                #                 rvsi = Histogram_intra_group[:, i]
+                #                 rvso = Histogram_other_group[:, i]
+                #                 result = stats.mannwhitneyu(rvsi, rvso)
+                #                 if (result.pvalue < 0.05 ) and (
+                #                     np.median(rvsi) > np.median(rvso)
+                #                 ):
+                #                     candidates.append(i)
+                #             Overpresented_patterns[subgroup_id].append(set(candidates))
+                #         Overpresented_patterns[subgroup_id] = list(
+                #             set.intersection(*Overpresented_patterns[subgroup_id])
+                #         )
+                # for subgroup_id, Candidates in Overpresented_patterns.items():
+                #     print(
+                #         "subgroup_id: {} (N = {}), hr = {:.4f}, p = {:.4f}".format(
+                #             subgroup_id, np.sum(Subgroup_ids_ == subgroup_id), HR[subgroup_id - 1]["hr"], HR[subgroup_id - 1]["p"]
+                #         )
+                #     )
+                #     print(Candidates)
 
                 # Num_patterns_to_test = 0
                 # for subgroup_id, Candidates in Overpresented_patterns.items():

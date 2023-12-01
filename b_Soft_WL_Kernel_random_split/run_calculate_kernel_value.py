@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--iteration", type=int, default=1, help="Iteration of neighborhood aggregation"
+    "--iteration", type=int, default=0, help="Iteration of neighborhood aggregation"
 )
 parser.add_argument(
     "--k", type=int, default=500, help="Neighbor of neighborhood in PhenoGraph"
@@ -19,7 +19,7 @@ parser.add_argument(
 parser.add_argument(
     "--node_label",
     type=str,
-    default="TMECellType",
+    default="CellCategory",
     help="node label: cell_type or cell-category",
 )
 args = parser.parse_args()
@@ -27,7 +27,12 @@ print(args)
 
 FILE_NAMES = os.listdir(
     os.path.join(
-        PROJECT_ROOT, "Output", "b_Soft_WL_Kernel_random_split", "Danenberg", "Subset_1", "Subtrees"
+        PROJECT_ROOT,
+        "Output",
+        "b_Soft_WL_Kernel_random_split",
+        "Danenberg",
+        "Subset_1",
+        "Subtrees",
     )
 )
 
@@ -36,24 +41,55 @@ FILE_NAMES = os.listdir(
 Pattern_ids = []
 for i in range(len(FILE_NAMES)):
     file_name = FILE_NAMES[i]
-    pattern_ids = np.load(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Danenberg",
-            "Subset_1",
-            "Subtrees",
-            file_name,
-            "pattern_ids",
-            args.node_label,
-            "pattern_id_iter_"
-            + str(args.iteration)
-            + "_PhenoGraph_k_"
-            + str(args.k)
-            + ".npy",
+    if args.iteration == 0:
+            pattern_ids = np.load(
+                os.path.join(
+                    PROJECT_ROOT,
+                    "Output",
+                    "a_Cellular_graph_random_split",
+                    "Danenberg",
+                    "Subset_1",
+                    file_name,
+                    args.node_label + ".npy",
+                )
+            )
+    else:
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "b_Soft_WL_Kernel_random_split",
+                "Danenberg",
+                "Subset_1",
+                "Subtrees",
+                file_name,
+                "pattern_ids",
+                args.node_label,
+                "pattern_id_iter_"
+                + str(args.iteration)
+                + "_PhenoGraph_k_"
+                + str(args.k)
+                + ".npy",
+            )
         )
-    )
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "b_Soft_WL_Kernel_random_split",
+                "Danenberg",
+                "Subset_1",
+                "Subtrees",
+                file_name,
+                "pattern_ids",
+                args.node_label,
+                "pattern_id_iter_"
+                + str(args.iteration)
+                + "_PhenoGraph_k_"
+                + str(args.k)
+                + ".npy",
+            )
+        )
     Pattern_ids.append(pattern_ids)
     print(f"Loading {file_name}", pattern_ids.shape)
 assert len(Pattern_ids) == len(FILE_NAMES)
@@ -67,24 +103,37 @@ Histogram_dict = {}
 for i in range(len(FILE_NAMES)):
     file_name = FILE_NAMES[i]
     patient_id = int(file_name.split("_")[1])
-    pattern_ids = np.load(
-        os.path.join(
-            PROJECT_ROOT,
-            "Output",
-            "b_Soft_WL_Kernel_random_split",
-            "Danenberg",
-            "Subset_1",
-            "Subtrees",
-            file_name,
-            "pattern_ids",
-            args.node_label,
-            "pattern_id_iter_"
-            + str(args.iteration)
-            + "_PhenoGraph_k_"
-            + str(args.k)
-            + ".npy",
+    if args.iteration == 0:
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "a_Cellular_graph_random_split",
+                "Danenberg",
+                "Subset_1",
+                file_name,
+                args.node_label + ".npy",
+            )
         )
-    )
+    else:
+        pattern_ids = np.load(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "b_Soft_WL_Kernel_random_split",
+                "Danenberg",
+                "Subset_1",
+                "Subtrees",
+                file_name,
+                "pattern_ids",
+                args.node_label,
+                "pattern_id_iter_"
+                + str(args.iteration)
+                + "_PhenoGraph_k_"
+                + str(args.k)
+                + ".npy",
+            )
+        )
     histogram = np.zeros(num_unique_patterns)
     for j in range(num_unique_patterns):
         histogram[j] = np.sum(pattern_ids == j)
@@ -110,6 +159,25 @@ SoftWL_dict = {
     "Histogram": Histograms,
     "Gram_matrix": Gram_matrix,
 }
+if args.iteration == 0:
+    pickle.dump(
+        SoftWL_dict,
+        open(
+            os.path.join(
+                PROJECT_ROOT,
+                "Output",
+                "b_Soft_WL_Kernel_random_split",
+                "Danenberg",
+                "Subset_1",
+                "SoftWL_dict_iter_"
+                + str(args.iteration)
+                + "_"
+                + args.node_label
+                + ".pkl",
+            ),
+            "wb",
+        ),
+    )
 pickle.dump(
     SoftWL_dict,
     open(
@@ -123,7 +191,7 @@ pickle.dump(
             + str(args.iteration)
             + "_PhenoGraph_k_"
             + str(args.k)
-            +"_"
+            + "_"
             + args.node_label
             + ".pkl",
         ),
@@ -164,26 +232,26 @@ print("Saving Gram matrix", Gram_matrix.shape)
 #         ),
 #         histogram,
 #     )
-    # f, ax = plt.subplots(figsize=(5, 3))
-    # ax.bar(np.arange(len(histogram)), histogram)
-    # ax.set_xlabel("Pattern ID")
-    # ax.set_ylabel("Frequency")
-    # ax.set_ylim([0, np.percentile(Histograms, 95)])
-    # f.savefig(
-    #     os.path.join(
-    #         PROJECT_ROOT,
-    #         "Output",
-    #         "b_Soft_WL_Kernel",
-    #         "Danenberg",
-    #         "Cohort_1",
-    #         "Histograms",
-    #         "patient_" + str(patient_id),
-    #         "histogram_iter_"
-    #         + str(args.iteration)
-    #         + "PhenoGraph_k_"
-    #         + str(args.k)
-    #         + ".png",
-    #     ),
-    #     dpi=300,
-    # )
-    # print("Saving histogram for patient", patient_id, histogram.shape)
+# f, ax = plt.subplots(figsize=(5, 3))
+# ax.bar(np.arange(len(histogram)), histogram)
+# ax.set_xlabel("Pattern ID")
+# ax.set_ylabel("Frequency")
+# ax.set_ylim([0, np.percentile(Histograms, 95)])
+# f.savefig(
+#     os.path.join(
+#         PROJECT_ROOT,
+#         "Output",
+#         "b_Soft_WL_Kernel",
+#         "Danenberg",
+#         "Cohort_1",
+#         "Histograms",
+#         "patient_" + str(patient_id),
+#         "histogram_iter_"
+#         + str(args.iteration)
+#         + "PhenoGraph_k_"
+#         + str(args.k)
+#         + ".png",
+#     ),
+#     dpi=300,
+# )
+# print("Saving histogram for patient", patient_id, histogram.shape)
