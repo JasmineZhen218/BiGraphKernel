@@ -23,7 +23,7 @@ def find_overpresented_patterns(Histograms_, Subgroup_ids_, HR, adjust=False):
                     rvsi = Histogram_intra_group[:, i]
                     rvso = Histogram_other_group[:, i]
                     test_result = stats.mannwhitneyu(rvsi, rvso, alternative="greater")
-                    if (test_result.pvalue < 0.05/Histograms_.shape[1]):
+                    if (test_result.pvalue < 0.05/Histograms_.shape[1]) & (np.median(rvsi) > 0.05):
                         candidates.append(i)
                         # print(
                         #     "Pattern {} overpresented in S{} by {:.3f} times (p={:.5f})".format(
@@ -42,6 +42,26 @@ def find_overpresented_patterns(Histograms_, Subgroup_ids_, HR, adjust=False):
 
     return Overpresented_patterns
 
+# def find_overpresented_patterns(Histograms_, Subgroup_ids_, HR, adjust=False):
+#     if adjust:
+#         alpha = 0.05 / len(HR)
+#     else:
+#         alpha = 0.05
+#     Overpresented_patterns = {}
+#     for hr_dict in HR:
+#         subgroup_id = hr_dict["subgroup_id"]
+#         if hr_dict["p"]:
+#             Overpresented_patterns[subgroup_id] = []
+#             Histogram_intra_group = Histograms_[Subgroup_ids_ == subgroup_id]
+#             Histogram_other_group = Histograms_[Subgroup_ids_ != subgroup_id]
+#             for i in range(Histograms_.shape[1]):
+#                 rvsi = Histogram_intra_group[:, i]
+#                 rvso = Histogram_other_group[:, i]
+#                 test_result = stats.mannwhitneyu(rvsi, rvso, alternative="greater")
+#                 if (test_result.pvalue < 0.05):
+#                     Overpresented_patterns[subgroup_id].append(i)
+
+#     return Overpresented_patterns
 
 def find_underpresented_patterns(Histograms_, Subgroup_ids_, HR, adjust=False):
     if adjust:

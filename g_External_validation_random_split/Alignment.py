@@ -1,3 +1,4 @@
+from enum import unique
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 
@@ -51,13 +52,13 @@ def centroid_alignment(X_reference, Label_reference, X_query, k=100):
 from skimage import filters
 
 
-def centroid_alignment_based_on_similarity(Similarity, Label_reference, k=10, quality_control_threshold=0.5):
+def centroid_alignment_based_on_similarity(Similarity, Label_reference, k=1, quality_control_threshold=0.5):
     threshold = filters.threshold_otsu(Similarity)
     threshold = np.percentile(Similarity, 90)
     print(threshold)
     assert Similarity.shape[1] == len(Label_reference)
     Unique_label_reference = np.unique(Label_reference)
-    Label_query_hat = np.zeros((Similarity.shape[0], len(Unique_label_reference)))
+    Label_query_hat = np.zeros((Similarity.shape[0]))
     # for i in range(len(Unique_label_reference)):
     #     unique_label = Unique_label_reference[i]
     #     similarity_to_unique_label = np.mean(
@@ -79,8 +80,9 @@ def centroid_alignment_based_on_similarity(Similarity, Label_reference, k=10, qu
         
     #     Label_query_hat[(np.argmax(Similarity_group, axis=1) == i) & (np.max(Similarity_group, axis=1) >quality_control_threshold), i] = 1
     for i in range(Similarity.shape[0]):
+        similarity_knn = np.sort(Similarity[i, :])[::-1][:k]
         label_knn = Label_reference[np.argsort(Similarity[i, :])[::-1][:k]]
-        if len(np.unique(label_knn)) == 1:
-            Label_query_hat[i, int(np.unique(label_knn)-1)] = 1
+        unique_label, counts = np.unique(label_knn, return_counts=True)
+        Label_query_hat[i] =  unique_label[np.argmax(counts)]
         # Label_query_hat[i, np.argmax(Similarity[i, :])] = 1
     return Label_query_hat
